@@ -1,0 +1,37 @@
+@media (max-width: 768px) {
+    nav {
+        padding: 14px 16px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+    .logo { font-size: 1rem; }
+    .nav-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px 12px;
+        padding-right: 0;
+        width: 100%;
+        justify-content: flex-start;
+    }
+    .nav-links a {
+        margin-left: 0;
+        padding: 6px 8px;
+        font-size: 0.8rem;
+        letter-spacing: 1px;
+    }
+    .music-player {
+        top: auto;
+        bottom: 18px;
+        right: 12px;
+        left: 12px;
+        transform: none;
+        width: auto;
+        justify-content: space-between;
+        padding: 10px 14px;
+        gap: 10px;
+    }
+    .music-title { font-size: 0.8rem; }
+    .music-artist { font-size: 0.65rem; }
+    .vinyl { width: 26px; height: 26px; }
+}
