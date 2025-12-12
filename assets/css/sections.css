@@ -83,53 +83,72 @@
 .girl-theme .highlight-text { border-color: var(--accent-pink); }
 .boy-theme .highlight-text { border-color: var(--accent-blue); }
 
-/* Interaction */
-.interaction-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
-    width: 100%;
-    max-width: 1000px;
+/* Interaction (Galaxy Lenses) */
+.lens-section {
+    padding: 0;
+    align-items: stretch;
+    justify-content: center;
+    background: transparent;
+    overflow: hidden;
+    color: #fff;
 }
-.flip-card {
-    background-color: transparent;
-    height: 250px;
-    perspective: 1000px;
-    cursor: pointer;
-}
-.flip-inner {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    text-align: center;
-    transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    transform-style: preserve-3d;
-}
-.flip-card:hover .flip-inner { transform: rotateY(180deg); }
-.flip-front, .flip-back {
+.lens-canvas {
     position: absolute;
+    inset: 0;
     width: 100%;
     height: 100%;
-    backface-visibility: hidden;
-    border-radius: 16px;
+    cursor: grab;
+    z-index: 1;
+}
+.lens-canvas:active { cursor: grabbing; }
+.lens-loading {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #666;
+    font-size: 0.85rem;
+    letter-spacing: 2px;
+    transition: opacity 0.5s;
+    pointer-events: none;
+    z-index: 3;
+}
+.lens-ui {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-end;
     align-items: center;
-    padding: 30px;
-    border: 1px solid rgba(255,255,255,0.10);
-    background: rgba(255,255,255,0.06);
-    backdrop-filter: blur(12px) saturate(120%);
-    box-shadow: 0 16px 40px rgba(0,0,0,0.35), inset 0 0 0 1px rgba(255,255,255,0.04);
+    padding-bottom: 60px;
+    z-index: 2;
+    transition: opacity 0.5s;
 }
-.flip-back {
-    transform: rotateY(180deg);
-    background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+.lens-ui h2 {
+    font-size: 2.4rem;
+    letter-spacing: 5px;
+    text-shadow: 0 0 20px rgba(255,255,255,0.3);
+    margin: 0 0 14px 0;
+    background: linear-gradient(to bottom, #fff, #888);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    opacity: 0.9;
 }
-.handwritten {
-    font-family: var(--font-hand);
-    font-size: 1.5rem;
-    color: #f2e7c7;
+.lens-hint {
+    font-size: 0.95rem;
+    color: rgba(255,255,255,0.7);
+    border: 1px solid rgba(255,255,255,0.15);
+    padding: 10px 24px;
+    border-radius: 50px;
+    background: rgba(0,0,0,0.35);
+    backdrop-filter: blur(10px);
+    animation: lensPulse 3s infinite ease-in-out;
+    letter-spacing: 1px;
+}
+@keyframes lensPulse {
+    0%, 100% { opacity: 0.55; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.02); }
 }
 
 /* Earth */

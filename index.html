@@ -8,11 +8,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <!-- 引入 Google Fonts (手写体) -->
     <link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@300;700&family=Inter:wght@400;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/base.css">
     <link rel="stylesheet" href="assets/css/layout.css">
     <link rel="stylesheet" href="assets/css/components.css">
     <link rel="stylesheet" href="assets/css/sections.css">
     <link rel="stylesheet" href="assets/css/mobile.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 </head>
 <body>
 
@@ -109,228 +111,29 @@
         </div>
     </section>
 
-    <!-- 3. 爱的默契 (Interactive) -->
-    <section id="interaction">
+    <!-- 3. 爱的语言漂浮画布 -->
+    <section id="love-float-section">
         <div class="love-float">
             <div class="love-float-heading">
                 <div class="section-subtitle">UNDERSTANDING</div>
-                <h2 class="section-title">爱的语言翻译器</h2>
+                <h2 class="section-title">要如何翻译我爱你</h2>
             </div>
             <div id="love-float-canvas" class="love-float-canvas"></div>
             <div class="love-float-overlay">SWIPE LEFT TO SPEED · SWIPE RIGHT TO SLOW</div>
         </div>
+    </section>
 
-        <div class="interaction-grid">
-            <div class="flip-card">
-                <div class="flip-inner">
-                    <div class="flip-front">
-                        <h3>大思的语言</h3>
-                        <p style="margin-top:10px; color:#aaa;">"快去申请学校，怎么还没做这个？"</p>
-                    </div>
-                    <div class="flip-back">
-                        <h3>真心话</h3>
-                        <p class="handwritten">"我想和你有一个确定的未来，我想和你一起变得更好。"</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="flip-card">
-                <div class="flip-inner">
-                    <div class="flip-front">
-                        <h3>周浩的语言</h3>
-                        <p style="margin-top:10px; color:#aaa;">"睡一觉就好了，没事的。"</p>
-                    </div>
-                    <div class="flip-back">
-                        <h3>真心话</h3>
-                        <p class="handwritten">"我不想让你这么累，无论发生什么，我都在这里陪着你。"</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="flip-card">
-                <div class="flip-inner">
-                    <div class="flip-front">
-                        <h3>我们的模式</h3>
-                        <p style="margin-top:10px; color:#aaa;">风筝 & 线</p>
-                    </div>
-                    <div class="flip-back">
-                        <h3>互补</h3>
-                        <p class="handwritten">大思带着周浩看到了更广阔的世界，周浩让大思在疲惫时有一个可以停靠的港湾。</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 卡片 1：关于“吃” -->
-            <div class="flip-card">
-                <div class="flip-inner">
-                    <div class="flip-front">
-                        <h3>关于“吃” (The Foodie Love)</h3>
-                        <p style="margin-top:10px; color:#aaa;">"饿死我了 / 吃个饭去 / 给你带了呀米呀米"</p>
-                    </div>
-                    <div class="flip-back">
-                        <h3>真心话</h3>
-                        <p class="handwritten">"你是我的生活必需品。我想见你，哪怕只是坐在一起吃顿无聊的饭。"</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 卡片 2：周浩的“随便” -->
-            <div class="flip-card">
-                <div class="flip-inner">
-                    <div class="flip-front">
-                        <h3>周浩的“随便” (The Passive Consent)</h3>
-                        <p style="margin-top:10px; color:#aaa;">"都行 / 听你的 / 随便 / 没意见"</p>
-                    </div>
-                    <div class="flip-back">
-                        <h3>真心话</h3>
-                        <p class="handwritten">"因为是你，所以我都喜欢。我信任你的品味，也享受被你安排的安稳感。"</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 卡片 3：大思的“分享” -->
-            <div class="flip-card">
-                <div class="flip-inner">
-                    <div class="flip-front">
-                        <h3>大思的“分享” (The Sharing Stream)</h3>
-                        <p style="margin-top:10px; color:#aaa;">"[图片] (路边的狗) / [图片] (奇怪的云) / 看这个好笑不"</p>
-                    </div>
-                    <div class="flip-back">
-                        <h3>真心话</h3>
-                        <p class="handwritten">"我的世界如果缺少了你的注视，就变得黯淡无光。我想让你参与我生命的每一分钟。"</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 卡片 4：争吵时的“晚安” -->
-            <div class="flip-card">
-                <div class="flip-inner">
-                    <div class="flip-front">
-                        <h3>争吵时的“晚安” (The Truce)</h3>
-                        <p style="margin-top:10px; color:#aaa;">"睡觉吧 / 困了 / 晚安 (在气氛不对时)"</p>
-                    </div>
-                    <div class="flip-back">
-                        <h3>真心话</h3>
-                        <p class="handwritten">"我不想吵架伤感情。我们暂停一下，但请放心，明天醒来我依然爱你。"</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 卡片 5：周浩的“在楼下” -->
-            <div class="flip-card">
-                <div class="flip-inner">
-                    <div class="flip-front">
-                        <h3>周浩的“在楼下” (The Action)</h3>
-                        <p style="margin-top:10px; color:#aaa;">"下来 / 到楼下了 / 给你放门口了"</p>
-                    </div>
-                    <div class="flip-back">
-                        <h3>真心话</h3>
-                        <p class="handwritten">"我不善言辞，但我永远是你触手可及的依靠。你需要我的时候，我一定在。"</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 卡片 6：大思的“骂人” -->
-            <div class="flip-card">
-                <div class="flip-inner">
-                    <div class="flip-front">
-                        <h3>大思的“骂人” (The Tough Love)</h3>
-                        <p style="margin-top:10px; color:#aaa;">"你是猪吗 / 傻瓜 / 欠揍"</p>
-                    </div>
-                    <div class="flip-back">
-                        <h3>真心话</h3>
-                        <p class="handwritten">"这是我对最亲密的人才有的撒娇。你在我面前可以不用伪装成大人。"</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 卡片 7：周浩的“定心丸” -->
-            <div class="flip-card">
-                <div class="flip-inner">
-                    <div class="flip-front">
-                        <h3>周浩的“定心丸” (The Anchor)</h3>
-                        <p style="margin-top:10px; color:#aaa;">"小问题 / 没事 / 不急 / 慢慢来"</p>
-                    </div>
-                    <div class="flip-back">
-                        <h3>真心话</h3>
-                        <p class="handwritten">"别慌，天塌下来有我顶着。无论遇到什么麻烦，我都会陪你一起解决，做你最稳的后盾。"</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 卡片 8：大思的“蓝图” -->
-            <div class="flip-card">
-                <div class="flip-inner">
-                    <div class="flip-front">
-                        <h3>大思的“蓝图” (The Architect)</h3>
-                        <p style="margin-top:10px; color:#aaa;">"以后我们去... / 以后养只狗 / 等你来了我们..."</p>
-                    </div>
-                    <div class="flip-back">
-                        <h3>真心话</h3>
-                        <p class="handwritten">"我的未来规划里，每一帧都有你的身影。等待不是因为无奈，而是因为对我们共同生活的笃定。"</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 卡片 9：最高级的“不嫌弃” -->
-            <div class="flip-card">
-                <div class="flip-inner">
-                    <div class="flip-front">
-                        <h3>最高级的“不嫌弃” (The Realness)</h3>
-                        <p style="margin-top:10px; color:#aaa;">"拉屎去了 / 闻屁 / [发丑照] / 看看屎"</p>
-                    </div>
-                    <div class="flip-back">
-                        <h3>真心话</h3>
-                        <p class="handwritten">"我们在彼此面前不需要任何伪装。爱就是见过你最真实、最狼狈、甚至最‘恶心’的样子，依然觉得你可爱。"</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 卡片 10：特殊的“角色扮演” -->
-            <div class="flip-card">
-                <div class="flip-inner">
-                    <div class="flip-front">
-                        <h3>特殊的“角色扮演” (The Best Friend)</h3>
-                        <p style="margin-top:10px; color:#aaa;">"兄弟 / 老弟 / 姐 / 义父"</p>
-                    </div>
-                    <div class="flip-back">
-                        <h3>真心话</h3>
-                        <p class="handwritten">"我们不仅仅是情侣，更是无话不谈的死党、并肩作战的战友。这种多重身份的羁绊，是谁也剪不断的。"</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 卡片 11：异地的“通感” -->
-            <div class="flip-card">
-                <div class="flip-inner">
-                    <div class="flip-front">
-                        <h3>异地的“通感” (The Telepathy)</h3>
-                        <p style="margin-top:10px; color:#aaa;">"我也在吃 / 梦到你了 / [同时发消息]"</p>
-                    </div>
-                    <div class="flip-back">
-                        <h3>真心话</h3>
-                        <p class="handwritten">"虽然身处异地，但我们的灵魂好像在同一时区。我在努力用生活的细节，填补我们之间的物理距离。"</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 卡片 12：周浩的“强制休息” -->
-            <div class="flip-card">
-                <div class="flip-inner">
-                    <div class="flip-front">
-                        <h3>周浩的“强制休息” (The Caretaker)</h3>
-                        <p style="margin-top:10px; color:#aaa;">"快去睡 / 别学了 / 挂了昂"</p>
-                    </div>
-                    <div class="flip-back">
-                        <h3>真心话</h3>
-                        <p class="handwritten">"看着你累我会心疼。比起你的前途和作业，我更在意你的身体和健康。"</p>
-                    </div>
-                </div>
-            </div>
+    <!-- 4. 爱的默契 (Galaxy Lenses) -->
+    <section id="interaction" class="lens-section">
+        <div class="lens-loading" id="lens-loading">正在连接星域...</div>
+        <div class="lens-canvas" id="lens-canvas"></div>
+        <div class="lens-ui" id="lens-ui">
+            <h2>GALAXY LENSES</h2>
+            <div class="lens-hint">🖱️ 双击屏幕散开 · 拖拽透镜翻转 · 拖拽背景旋转</div>
         </div>
     </section>
 
-    <!-- 4. 3D地球 (Distance) -->
+    <!-- 5. 3D地球 (Distance) -->
     <section id="earth-section">
         <div id="earth-container"></div>
         <div class="earth-overlay">
@@ -898,12 +701,422 @@
             renderer.setSize(window.innerWidth, window.innerHeight);
         });
 
+        // --- 2.1 Galaxy Lenses (Interaction replacement) ---
+        (() => {
+            const container = document.getElementById('lens-canvas');
+            const loading = document.getElementById('lens-loading');
+            const uiLayer = document.getElementById('lens-ui');
+            if (!container || !window.THREE || !window.gsap) return;
+
+            const cardsData = [
+                { title: "大思的语言", front: "快去申请学校，怎么还没做这个？", back: "我想和你有一个确定的未来，我想和你一起变得更好。" },
+                { title: "周浩的语言", front: "睡一觉就好了，没事的。", back: "我不想让你这么累，无论发生什么，我都在这里陪着你。" },
+                { title: "我们的模式", front: "风筝 & 线", back: "大思带着周浩看到更广阔的世界，周浩给大思疲惫时停靠的港湾。" },
+                { title: "关于“吃”", front: "饿死我了 / 吃个饭去 / 给你带了呀米呀米", back: "你是我的生活必需品。我想见你，哪怕只是坐在一起吃顿无聊的饭。" },
+                { title: "周浩的“随便”", front: "都行 / 听你的 / 随便 / 没意见", back: "因为是你，所以我都喜欢。我信任你的品味，也享受被你安排的安稳感。" },
+                { title: "大思的“分享”", front: "[图片] (路边的狗) / [图片] (奇怪的云)", back: "我的世界如果缺少了你的注视，就变得黯淡无光。我想让你参与我生命的每一分钟。" },
+                { title: "争吵时的“晚安”", front: "睡觉吧 / 困了 / 晚安 (在气氛不对时)", back: "我不想吵架伤感情。我们暂停一下，但请放心，明天醒来我依然爱你。" },
+                { title: "周浩的“在楼下”", front: "下来 / 到楼下了 / 给你放门口了", back: "我不善言辞，但我永远是你触手可及的依靠。你需要我的时候，我一定在。" },
+                { title: "大思的“骂人”", front: "你是猪吗 / 傻瓜 / 欠揍", back: "这是我对最亲密的人才有的撒娇。你在我面前可以不用伪装成大人。" },
+                { title: "周浩的“定心丸”", front: "小问题 / 没事 / 不急 / 慢慢来", back: "别慌，天塌下来有我顶着。无论遇到什么麻烦，我都会陪你一起解决，做你最稳的后盾。" },
+                { title: "大思的“蓝图”", front: "以后我们去... / 以后养只狗", back: "我的未来规划里，每一帧都有你的身影。等待不是因为无奈，而是因为对我们共同生活的笃定。" },
+                { title: "最高级的“不嫌弃”", front: "拉屎去了 / 闻屁 / [丑照]", back: "我们在彼此面前不需要任何伪装。爱就是见过你最真实、最狼狈的样子，依然觉得你可爱。" },
+                { title: "角色扮演", front: "兄弟 / 老弟 / 姐 / 义父", back: "我们不仅是情侣，更是死党和战友。这种多重羁绊是谁也剪不断的。" },
+                { title: "异地的“通感”", front: "我也在吃 / 梦到你了 / [同时发消息]", back: "虽然身处异地，但灵魂在同一时区。我在努力用细节填补物理距离。" },
+                { title: "强制休息", front: "快去睡 / 别学了 / 挂了昂", back: "看着你累我会心疼。比起你的前途，我更在意你的健康。" }
+            ];
+
+            const size = () => ({
+                w: Math.max(container.clientWidth || container.offsetWidth || window.innerWidth, 1),
+                h: Math.max(container.clientHeight || container.offsetHeight || window.innerHeight, 1)
+            });
+
+            const { w: initW, h: initH } = size();
+            const scene = new THREE.Scene();
+            scene.fog = new THREE.FogExp2(0x020205, 0.015);
+
+            const lensCamera = new THREE.PerspectiveCamera(45, initW / initH, 0.1, 1000);
+            lensCamera.position.z = 45;
+
+            const lensRenderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+            lensRenderer.setSize(initW, initH);
+            lensRenderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            lensRenderer.physicallyCorrectLights = true;
+            lensRenderer.toneMapping = THREE.ACESFilmicToneMapping;
+            lensRenderer.outputEncoding = THREE.sRGBEncoding;
+            container.appendChild(lensRenderer.domElement);
+
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.2);
+            scene.add(ambientLight);
+
+            const pointLight1 = new THREE.PointLight(0xffd700, 2.5, 100);
+            pointLight1.position.set(15, 15, 20);
+            scene.add(pointLight1);
+
+            const pointLight2 = new THREE.PointLight(0xaaccff, 2.5, 100);
+            pointLight2.position.set(-15, -15, 20);
+            scene.add(pointLight2);
+
+            const rectLight = new THREE.RectAreaLight(0xffffff, 5, 20, 20);
+            rectLight.position.set(0, 20, 0);
+            rectLight.lookAt(0, 0, 0);
+            scene.add(rectLight);
+
+            const starsGeo = new THREE.BufferGeometry();
+            const starsCount = 4000;
+            const posArray = new Float32Array(starsCount * 3);
+            for (let i = 0; i < starsCount * 3; i++) {
+                posArray[i] = (Math.random() - 0.5) * 300;
+            }
+            starsGeo.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+            const starsMat = new THREE.PointsMaterial({ size: 0.15, color: 0xffffff, transparent: true, opacity: 0.6 });
+            const starField = new THREE.Points(starsGeo, starsMat);
+            scene.add(starField);
+
+            const lenses = [];
+            const tiltGroup = new THREE.Group();
+            scene.add(tiltGroup);
+            const lensGroup = new THREE.Group();
+            tiltGroup.add(lensGroup);
+            tiltGroup.rotation.z = Math.PI / 4;
+            tiltGroup.rotation.x = Math.PI / 2.5;
+
+            function createTextTexture(text, title = '', options = {}) {
+                const { isBack = false, showTitle = true } = options;
+                const c = document.createElement('canvas');
+                c.width = 512;
+                c.height = 512;
+                const ctx = c.getContext('2d');
+
+                // Glass body (更实心、不透明)
+                ctx.beginPath();
+                ctx.arc(256, 256, 230, 0, Math.PI * 2);
+                ctx.fillStyle = isBack ? '#121a2c' : 'rgba(42, 48, 62, 0.98)';
+                ctx.fill();
+
+                // Edge halo (纯白不透明)
+                const edge = ctx.createRadialGradient(256, 256, 180, 256, 256, 230);
+                edge.addColorStop(0, 'rgba(255,255,255,0)');
+                edge.addColorStop(1, 'rgba(235, 239, 255, 1)');
+                ctx.fillStyle = edge;
+                ctx.fill();
+
+                // Rim stroke
+                ctx.lineWidth = 6;
+                ctx.strokeStyle = 'rgba(236, 242, 255, 0.9)';
+                ctx.stroke();
+
+                // Specular arc (简洁高光)
+                const highlight = ctx.createLinearGradient(180, 140, 340, 220);
+                highlight.addColorStop(0, 'rgba(255,255,255,0)');
+                highlight.addColorStop(0.45, 'rgba(255,255,255,0.35)');
+                highlight.addColorStop(0.7, 'rgba(255,255,255,0.05)');
+                highlight.addColorStop(1, 'rgba(255,255,255,0)');
+                ctx.fillStyle = highlight;
+                ctx.beginPath();
+                ctx.ellipse(250, 190, 140, 50, -0.35, 0, Math.PI * 2);
+                ctx.fill();
+
+                // Additional spec line
+                ctx.fillStyle = 'rgba(255,255,255,0.18)';
+                ctx.beginPath();
+                ctx.ellipse(300, 220, 100, 18, -0.3, 0, Math.PI * 2);
+                ctx.fill();
+
+                ctx.textAlign = 'center';
+                ctx.fillStyle = '#fefefe';
+                ctx.shadowColor = 'rgba(0,0,0,0.25)';
+                ctx.shadowBlur = 8;
+                ctx.shadowOffsetY = 2;
+
+                if (showTitle && title) {
+                    ctx.font = 'bold 30px "Playfair Display", "Noto Serif SC", serif';
+                    ctx.fillText(title, 256, 120);
+                }
+
+                ctx.font = isBack ? '32px "Noto Serif SC", serif' : '30px "Courier Prime", monospace';
+                let line = '';
+                let y = showTitle && title ? 170 : 150;
+                const lineHeight = 42;
+                const maxWidth = 360;
+                for (let n = 0; n < text.length; n++) {
+                    const testLine = line + text[n];
+                    const metrics = ctx.measureText(testLine);
+                    const testWidth = metrics.width;
+                    if (testWidth > maxWidth && n > 0) {
+                        ctx.fillText(line, 256, y);
+                        line = text[n];
+                        y += lineHeight;
+                    } else {
+                        line = testLine;
+                    }
+                }
+                ctx.fillText(line, 256, y);
+
+                const texture = new THREE.CanvasTexture(c);
+                texture.anisotropy = lensRenderer.capabilities.getMaxAnisotropy();
+                return texture;
+            }
+
+            const lensGeo = new THREE.CylinderGeometry(2.5, 2.5, 0.15, 64);
+            const glassMat = new THREE.MeshPhysicalMaterial({
+                color: 0xffffff,
+                metalness: 0.05,
+                roughness: 0.02,
+                transmission: 0.98,
+                thickness: 2.5,
+                envMapIntensity: 1.5,
+                clearcoat: 1.0,
+                clearcoatRoughness: 0.0,
+                ior: 1.7,
+                side: THREE.DoubleSide
+            });
+
+            function getFibonacciSpherePoints(samples, radius) {
+                const points = [];
+                const phi = Math.PI * (3.0 - Math.sqrt(5.0));
+                for (let i = 0; i < samples; i++) {
+                    const y = 1 - (i / (samples - 1)) * 2;
+                    const radiusAtY = Math.sqrt(1 - y * y);
+                    const theta = phi * i;
+                    const x = Math.cos(theta) * radiusAtY;
+                    const z = Math.sin(theta) * radiusAtY;
+                    points.push(new THREE.Vector3(x * radius, y * radius, z * radius));
+                }
+                return points;
+            }
+
+            const targetPoints = getFibonacciSpherePoints(cardsData.length, 11.5);
+
+            cardsData.forEach((data, i) => {
+                const lens = new THREE.Mesh(lensGeo, glassMat.clone());
+                const frontTex = createTextTexture(data.front, data.title, { isBack: false, showTitle: true });
+                const planeGeo = new THREE.PlaneGeometry(3.6, 3.6);
+                const frontMesh = new THREE.Mesh(planeGeo, new THREE.MeshBasicMaterial({ map: frontTex, transparent: true, side: THREE.FrontSide }));
+                frontMesh.rotation.x = -Math.PI / 2;
+                frontMesh.position.y = 0.081;
+                frontMesh.scale.set(0.85, 0.85, 0.85);
+                lens.add(frontMesh);
+
+                const backTex = createTextTexture(data.back, '', { isBack: true, showTitle: false });
+                const backMesh = new THREE.Mesh(planeGeo, new THREE.MeshBasicMaterial({ map: backTex, transparent: true, side: THREE.FrontSide }));
+                backMesh.rotation.x = Math.PI / 2;
+                backMesh.rotation.z = Math.PI;
+                backMesh.position.y = -0.081;
+                backMesh.scale.set(0.85, 0.85, 0.85);
+                lens.add(backMesh);
+
+                const ringRadius = 12;
+                const angleStep = (Math.PI * 2) / cardsData.length;
+                const currentAngle = i * angleStep;
+                const initX = Math.cos(currentAngle) * ringRadius;
+                const initY = 0;
+                const initZ = Math.sin(currentAngle) * ringRadius;
+                lens.position.set(initX, initY, initZ);
+                lens.rotation.set(0, -currentAngle, 0);
+                lens.rotateX(Math.PI / 2);
+                lens.rotateX(-Math.PI / 6);
+
+                const targetPos = targetPoints[i];
+                const targetRot = new THREE.Euler(Math.random() * Math.PI, Math.random() * Math.PI, 0);
+
+                lens.userData = {
+                    id: i,
+                    targetPos,
+                    targetRot,
+                    basePos: lens.position.clone(),
+                    velocity: new THREE.Vector3(),
+                    floatPhase: Math.random() * Math.PI * 2
+                };
+
+                lensGroup.add(lens);
+                lenses.push(lens);
+            });
+
+            if (loading) loading.style.opacity = 0;
+
+            const raycaster = new THREE.Raycaster();
+            const mouse = new THREE.Vector2();
+            let isScattered = false;
+            let activeLens = null;
+            let isDragging = false;
+            let prevMousePos = { x: 0, y: 0 };
+            let sceneRotationVelocityX = 0;
+            let sceneRotationVelocityY = 0;
+
+            const updateMouse = (e) => {
+                const rect = container.getBoundingClientRect();
+                mouse.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+                mouse.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
+            };
+
+            const scatterLenses = () => {
+                gsap.to(tiltGroup.rotation, { x: 0, z: 0, duration: 3, ease: "power2.inOut" });
+                lenses.forEach((lens, index) => {
+                    gsap.to(lens.position, {
+                        x: lens.userData.targetPos.x,
+                        y: lens.userData.targetPos.y,
+                        z: lens.userData.targetPos.z,
+                        duration: 2.5,
+                        ease: "power3.out",
+                        delay: index * 0.05
+                    });
+                    gsap.to(lens.rotation, {
+                        x: lens.userData.targetRot.x,
+                        y: lens.userData.targetRot.y,
+                        z: lens.userData.targetRot.z,
+                        duration: 3,
+                        ease: "power2.out"
+                    });
+                });
+                gsap.to(lensCamera.position, { z: 40, duration: 3, ease: "power2.inOut" });
+                if (uiLayer) {
+                    uiLayer.style.opacity = 0;
+                    setTimeout(() => { uiLayer.style.pointerEvents = 'none'; }, 500);
+                }
+            };
+
+            container.addEventListener('dblclick', () => {
+                if (!isScattered) {
+                    isScattered = true;
+                    scatterLenses();
+                }
+            });
+
+            const onMouseDown = (e) => {
+                if (!isScattered) return;
+                updateMouse(e);
+                raycaster.setFromCamera(mouse, lensCamera);
+                const intersects = raycaster.intersectObjects(lenses);
+
+                isDragging = true;
+                prevMousePos = { x: e.clientX, y: e.clientY };
+
+                if (intersects.length > 0) {
+                    activeLens = intersects[0].object;
+                    gsap.killTweensOf(activeLens.rotation);
+                    gsap.to(activeLens.scale, { x: 1.5, y: 1.5, z: 1.5, duration: 0.4, ease: "back.out(1.7)" });
+                    activeLens.material.emissive.setHex(0x222222);
+                    container.style.cursor = 'grabbing';
+                } else {
+                    activeLens = null;
+                    container.style.cursor = 'move';
+                }
+            };
+
+            const onMouseMove = (e) => {
+                if (!isScattered) return;
+                if (isDragging) {
+                    const deltaX = e.clientX - prevMousePos.x;
+                    const deltaY = e.clientY - prevMousePos.y;
+
+                    if (activeLens) {
+                        activeLens.rotation.z += deltaX * 0.015;
+                        activeLens.rotation.x += deltaY * 0.015;
+                    } else {
+                        tiltGroup.rotation.y += deltaX * 0.005;
+                        tiltGroup.rotation.x += deltaY * 0.005;
+                        sceneRotationVelocityY = deltaX * 0.0001;
+                        sceneRotationVelocityX = deltaY * 0.0001;
+                    }
+                    prevMousePos = { x: e.clientX, y: e.clientY };
+                } else {
+                    updateMouse(e);
+                    raycaster.setFromCamera(mouse, lensCamera);
+                    const intersects = raycaster.intersectObjects(lenses);
+                    if (intersects.length > 0) {
+                        container.style.cursor = 'grab';
+                        const hoveredObj = intersects[0].object;
+                        if (hoveredObj !== activeLens) {
+                            gsap.to(hoveredObj.scale, { x: 1.1, y: 1.1, z: 1.1, duration: 0.3 });
+                        }
+                    } else {
+                        container.style.cursor = 'default';
+                        lenses.forEach(l => {
+                            if (l !== activeLens) gsap.to(l.scale, { x: 1, y: 1, z: 1, duration: 0.3 });
+                        });
+                    }
+                }
+            };
+
+            const onMouseUp = () => {
+                if (activeLens) {
+                    gsap.to(activeLens.scale, { x: 1, y: 1, z: 1, duration: 0.5, ease: "power2.out" });
+                    activeLens.material.emissive.setHex(0x000000);
+                }
+                isDragging = false;
+                activeLens = null;
+                container.style.cursor = 'default';
+            };
+
+            container.addEventListener('mousedown', onMouseDown);
+            window.addEventListener('mousemove', onMouseMove);
+            window.addEventListener('mouseup', onMouseUp);
+            container.addEventListener('touchstart', (e) => onMouseDown(e.touches[0]));
+            window.addEventListener('touchmove', (e) => onMouseMove(e.touches[0]));
+            window.addEventListener('touchend', onMouseUp);
+
+            const clock = new THREE.Clock();
+            function animateLenses() {
+                requestAnimationFrame(animateLenses);
+                const time = clock.getElapsedTime();
+
+                if (!isDragging || activeLens) {
+                    if (isScattered) {
+                        tiltGroup.rotation.y += sceneRotationVelocityY;
+                        tiltGroup.rotation.x += sceneRotationVelocityX;
+                        sceneRotationVelocityY *= 0.95;
+                        sceneRotationVelocityX *= 0.95;
+                    }
+                }
+
+                if (!isScattered) {
+                    lensGroup.rotation.y -= 0.002;
+                }
+
+                lenses.forEach((lens, i) => {
+                    if (lens !== activeLens) {
+                        if (isScattered) {
+                            const t = time * 0.5 + i;
+                            lens.position.y += Math.sin(t) * 0.015;
+                            lens.position.x += Math.cos(t * 0.8) * 0.03;
+                            lens.rotation.z += 0.0005;
+                            lens.rotation.x += 0.0005;
+
+                            // 限制最大半径，让横向靠近边缘但不出屏
+                            const maxR = 17.5;
+                            const len = lens.position.length();
+                            if (len > maxR) {
+                                lens.position.multiplyScalar(maxR / len);
+                            }
+                        } else {
+                            const t = time * 2 + i;
+                            lens.position.y = lens.userData.basePos.y + Math.sin(t) * 0.1;
+                        }
+                    }
+                });
+
+                starField.rotation.y -= 0.0002;
+                lensRenderer.render(scene, lensCamera);
+            }
+            animateLenses();
+
+            const resizeLens = () => {
+                const { w, h } = size();
+                lensCamera.aspect = w / h;
+                lensCamera.updateProjectionMatrix();
+                lensRenderer.setSize(w, h);
+            };
+            window.addEventListener('resize', resizeLens);
+        })();
+
 
         // --- 3. Scroll Animation (Intersection Observer) ---
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if(entry.isIntersecting){
-                    entry.target.querySelector('.section-header').classList.add('visible');
+                    const header = entry.target.querySelector('.section-header');
+                    if (header) header.classList.add('visible');
                 }
             });
         }, { threshold: 0.3 });

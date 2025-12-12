@@ -8,6 +8,7 @@ function initParticlesCanvas() {
     let width, height;
     let particles = [];
     let meteors = [];
+    let pointer = { x: 0.5, y: 0.5 }; // 归一化指针位置，用于视差
 
     function initParticles() {
         width = window.innerWidth;
@@ -19,6 +20,7 @@ function initParticlesCanvas() {
             x: Math.random() * width,
             y: Math.random() * height,
             r: Math.random() * 2.2 + 0.3,
+            z: Math.random() * 1.4 + 0.3, // 景深层：0.3-1.7 越大越靠近
             d: Math.random() * 20,
             drift: (Math.random() - 0.5) * 0.15
         }));
@@ -58,11 +60,16 @@ function initParticlesCanvas() {
         });
         ctx.restore();
 
-        ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
         ctx.beginPath();
         particles.forEach(p => {
-            ctx.moveTo(p.x, p.y);
-            ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2, true);
+            const depthFactor = 1 / p.z; // z 越大越近
+            const size = p.r * depthFactor * 1.3;
+            const alpha = Math.min(1, 0.3 + depthFactor * 0.9);
+            const parallaxX = (pointer.x - 0.5) * 30 * (1.2 - depthFactor);
+            const parallaxY = (pointer.y - 0.5) * 30 * (1.2 - depthFactor);
+            ctx.fillStyle = `rgba(255,255,255,${alpha})`;
+            ctx.moveTo(p.x + parallaxX, p.y + parallaxY);
+            ctx.arc(p.x + parallaxX, p.y + parallaxY, size, 0, Math.PI * 2, true);
         });
         ctx.fill();
         moveParticles();
@@ -93,10 +100,15 @@ function initParticlesCanvas() {
     const meteorTimer = setInterval(spawnMeteor, 3000);
     const drawTimer = setInterval(drawParticles, 30);
     window.addEventListener('resize', initParticles);
+    window.addEventListener('pointermove', (e) => {
+        pointer.x = e.clientX / Math.max(width, 1);
+        pointer.y = e.clientY / Math.max(height, 1);
+    });
 
     return () => {
         clearInterval(meteorTimer);
         clearInterval(drawTimer);
         window.removeEventListener('resize', initParticles);
+        window.removeEventListener('pointermove', () => {});
     };
 }
