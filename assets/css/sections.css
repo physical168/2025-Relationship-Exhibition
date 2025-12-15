@@ -314,6 +314,7 @@
 #footer {
     height: 100vh;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
@@ -363,33 +364,38 @@
     margin-top: 50px;
     font-size: 0.9rem;
     color: rgba(192, 192, 192, 0.8);
-    font-family: 'Courier Prime', monospace;
+    font-family: 'Courier Prime', 'Courier New', monospace;
     display: flex;
     flex-direction: column;
     gap: 8px;
     align-items: center;
+    line-height: 1.6;
 }
 .formula-label {
     font-size: 0.85rem;
     color: rgba(255, 255, 255, 0.5);
     letter-spacing: 1px;
     text-transform: uppercase;
+    display: block;
 }
 .formula-content {
     font-size: 0.95rem;
     color: rgba(192, 192, 192, 0.9);
     letter-spacing: 0.5px;
+    display: block;
 }
 .footer-copyright {
-    position: absolute;
+    position: fixed;
     bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
+    left: 0;
+    right: 0;
+    text-align: center;
     font-size: 0.8rem;
     opacity: 0.3;
     color: #fff;
-    z-index: 2;
+    z-index: 10;
     white-space: nowrap;
+    pointer-events: none;
 }
 
 /* Love Languages Float */
