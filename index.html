@@ -423,6 +423,7 @@
 
     <!-- 7. Footer -->
     <section id="footer">
+        <div id="lorenz-container"></div>
         <div class="footer-inner">
             <div class="final-quote">
                 "无论身在何处，<br>我们的引力始终指向彼此"
@@ -430,9 +431,16 @@
             <p class="footer-desc">
                 愿你们在彼此的爱意中，成为更好的自己，也成就更好的我们。
             </p>
-            <div class="footer-meta">
-                2025 Relationship Exhibition | Created for Zhou Hao & Wuli Chaodu
+            <div class="lorenz-formula">
+                <span class="formula-label">Lorenz Attractor:</span>
+                <span class="formula-content">
+                    dx/dt = σ(y-x), dy/dt = x(ρ-z)-y, dz/dt = xy-βz
+                </span>
             </div>
+        </div>
+        <div class="footer-copyright">
+            2025 Relationship Exhibition | Created for Zhou Hao & Wuli Chaodu
+        </div>
         </div>
     </section>
 
@@ -1319,6 +1327,219 @@
         });
 
         updateMusicUI();
+
+        // --- 9. Lorenz Attractor Background (Footer) ---
+        (() => {
+            const lorenzContainer = document.getElementById('lorenz-container');
+            if (!lorenzContainer || !window.THREE) return;
+
+            const MAX_POINTS = 5000;
+            const SILVER_COLOR = 0xC0C0C0; // 银色
+
+            let lorenzScene, lorenzCamera, lorenzRenderer, lorenzControls, lorenzClock;
+            let lorenzLine, lineColors;
+
+            const tempVector1 = new THREE.Vector3();
+            const tempVector2 = new THREE.Vector3();
+            const tempColor = new THREE.Color();
+            const baseColor = new THREE.Color(SILVER_COLOR);
+
+            function initLorenz() {
+                lorenzScene = new THREE.Scene();
+                lorenzScene.background = null; // 透明背景，保留星空
+
+                const containerWidth = lorenzContainer.clientWidth || window.innerWidth;
+                const containerHeight = lorenzContainer.clientHeight || window.innerHeight;
+
+                lorenzCamera = new THREE.PerspectiveCamera(75, containerWidth / containerHeight, 0.1, 1000);
+                lorenzCamera.position.set(0, 0, 18); // 再放大1.5倍 (33/1.5≈22)
+                lorenzCamera.lookAt(0, 0, 0);
+
+                lorenzRenderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+                lorenzRenderer.setPixelRatio(window.devicePixelRatio);
+                lorenzRenderer.setSize(containerWidth, containerHeight);
+                
+                // 强制设置 canvas 样式
+                const canvas = lorenzRenderer.domElement;
+                canvas.style.position = 'absolute';
+                canvas.style.top = '0';
+                canvas.style.left = '0';
+                canvas.style.width = '100%';
+                canvas.style.height = '100%';
+                canvas.style.display = 'block';
+                
+                lorenzContainer.appendChild(canvas);
+
+                lorenzClock = new THREE.Clock();
+
+                loadLorenzAttractor();
+
+                window.addEventListener('resize', onLorenzResize, false);
+                animateLorenz();
+            }
+
+            function generateLorenzAttractorGeometry() {
+                const s = 10.0;
+                const r = 28.0;
+                const b = 8.0 / 3.0;
+                const dt = 0.005;
+
+                let x = 0.1, y = 0, z = 0;
+                const positions = [];
+
+                const PRE_HEAT = 1000;
+                for (let i = 0; i < PRE_HEAT; i++) {
+                    const dx = s * (y - x) * dt;
+                    const dy = (x * (r - z) - y) * dt;
+                    const dz = (x * y - b * z) * dt;
+                    x += dx;
+                    y += dy;
+                    z += dz;
+                }
+
+                for (let i = 0; i < MAX_POINTS; i++) {
+                    const dx = s * (y - x) * dt;
+                    const dy = (x * (r - z) - y) * dt;
+                    const dz = (x * y - b * z) * dt;
+                    x += dx;
+                    y += dy;
+                    z += dz;
+                    positions.push(x, y, z);
+                }
+
+                let minX = Infinity, minY = Infinity, minZ = Infinity;
+                let maxX = -Infinity, maxY = -Infinity, maxZ = -Infinity;
+
+                for (let i = 0; i < positions.length; i += 3) {
+                    minX = Math.min(minX, positions[i]);
+                    maxX = Math.max(maxX, positions[i]);
+                    minY = Math.min(minY, positions[i + 1]);
+                    maxY = Math.max(maxY, positions[i + 1]);
+                    minZ = Math.min(minZ, positions[i + 2]);
+                    maxZ = Math.max(maxZ, positions[i + 2]);
+                }
+
+                const rangeX = maxX - minX;
+                const rangeY = maxY - minY;
+                const rangeZ = maxZ - minZ;
+                const maxRange = Math.max(rangeX, rangeY, rangeZ);
+
+                const globalScale = 30 / maxRange;
+                const offsetX = (minX + maxX) / 2;
+                const offsetY = (minY + maxY) / 2;
+                const offsetZ = (minZ + maxZ) / 2;
+
+                const finalPositions = new Float32Array(positions.length);
+                for (let i = 0; i < positions.length; i += 3) {
+                    finalPositions[i] = (positions[i] - offsetX) * globalScale;
+                    finalPositions[i + 1] = (positions[i + 1] - offsetY) * globalScale;
+                    finalPositions[i + 2] = (positions[i + 2] - offsetZ) * globalScale;
+                }
+
+                const colors = new Float32Array(finalPositions.length);
+                for (let i = 0; i < finalPositions.length; i += 3) {
+                    colors[i] = baseColor.r;
+                    colors[i + 1] = baseColor.g;
+                    colors[i + 2] = baseColor.b;
+                }
+
+                const geometry = new THREE.BufferGeometry();
+                geometry.setAttribute('position', new THREE.BufferAttribute(finalPositions, 3));
+                geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
+                lineColors = geometry.attributes.color.array;
+                return geometry;
+            }
+
+            function loadLorenzAttractor() {
+                if (lorenzLine) {
+                    lorenzScene.remove(lorenzLine);
+                    lorenzLine.geometry.dispose();
+                    lorenzLine.material.dispose();
+                }
+
+                const geometry = generateLorenzAttractorGeometry();
+                const material = new THREE.LineBasicMaterial({
+                    color: 0xC0C0C0, // 银色
+                    vertexColors: true, // 启用顶点颜色实现流光效果
+                    linewidth: 2,
+                    blending: THREE.AdditiveBlending,
+                    transparent: true,
+                    opacity: 0.7 // 适中的透明度作为背景
+                });
+
+                lorenzLine = new THREE.Line(geometry, material);
+                lorenzLine.rotation.order = 'YXZ';
+                lorenzScene.add(lorenzLine);
+            }
+
+            function onLorenzResize() {
+                const containerWidth = lorenzContainer.clientWidth || window.innerWidth;
+                const containerHeight = lorenzContainer.clientHeight || window.innerHeight;
+                lorenzCamera.aspect = containerWidth / containerHeight;
+                lorenzCamera.updateProjectionMatrix();
+                lorenzRenderer.setSize(containerWidth, containerHeight);
+            }
+
+            function animateLorenz() {
+                requestAnimationFrame(animateLorenz);
+
+                const delta = lorenzClock.getDelta();
+                const rotationSpeed = 0.05 * delta; // 缓慢旋转
+                if (lorenzLine) {
+                    lorenzLine.rotation.y += rotationSpeed;
+                    lorenzLine.rotation.x += rotationSpeed * 0.3; // 添加轻微的X轴旋转
+                }
+
+                if (lorenzLine && lineColors) {
+                    const colorsAttribute = lorenzLine.geometry.attributes.color;
+                    const positionAttribute = lorenzLine.geometry.attributes.position;
+                    const positions = positionAttribute.array;
+                    const len = MAX_POINTS * 3;
+
+                    const cameraPosition = lorenzCamera.position;
+                    const time = lorenzClock.getElapsedTime() * 0.5;
+                    const pulseFactor = (Math.sin(time) * 0.05) + 0.95;
+
+                    for (let i = 0; i < len - 3; i += 3) {
+                        tempVector1.set(positions[i], positions[i + 1], positions[i + 2]);
+                        tempVector2.set(positions[i + 3], positions[i + 4], positions[i + 5]);
+
+                        const segmentDirection = tempVector2.clone().sub(tempVector1).normalize();
+                        const viewDirection = tempVector1.clone().sub(cameraPosition).normalize();
+                        const dotProduct = Math.abs(segmentDirection.dot(viewDirection));
+
+                        let edgeFactor = 1.0 - dotProduct;
+                        edgeFactor = Math.pow(edgeFactor, 3);
+
+                        const MIN_BRIGHTNESS = 0.1;
+                        const MAX_BRIGHTNESS_RANGE = 0.9;
+                        const finalFactor = MIN_BRIGHTNESS + (edgeFactor * MAX_BRIGHTNESS_RANGE * pulseFactor);
+
+                        tempColor.copy(baseColor).multiplyScalar(finalFactor);
+
+                        lineColors[i] = tempColor.r;
+                        lineColors[i + 1] = tempColor.g;
+                        lineColors[i + 2] = tempColor.b;
+
+                        if (i + 3 < len) {
+                            lineColors[i + 3] = tempColor.r;
+                            lineColors[i + 4] = tempColor.g;
+                            lineColors[i + 5] = tempColor.b;
+                        }
+                    }
+
+                    colorsAttribute.needsUpdate = true;
+                }
+
+                lorenzRenderer.render(lorenzScene, lorenzCamera);
+            }
+
+            // 延迟初始化，确保DOM完全加载
+            setTimeout(() => {
+                initLorenz();
+            }, 100);
+        })();
 
     </script>
 </body>
